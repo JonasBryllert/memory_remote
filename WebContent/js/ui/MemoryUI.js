@@ -108,7 +108,7 @@ define([
 		},
 		
 		moveResult: function(moveResultData) {
-			if (moveResultData.score) showScore(moveResultData.score);
+			if (moveResultData.score) this.showScore(moveResultData.score);
 			if (moveResultData.previousMove) this.previousMove(moveResultData);
 			//The below must be put on queue as previous move will hang for the user to see
 			if (moveResultData.yourMove) {
@@ -132,8 +132,10 @@ define([
 			var td2 = dom.byId(prevMove.id2);
 			domClass.remove(td1.children[0], "hide");
 			domClass.remove(td2.children[0], "hide");
+			this.showInfo("Other player made a move...");
 			setTimeout(lang.hitch(this, function() {
-				this.removeCells(td1, td2);
+				this.checkResult(td1, td2);
+				this.showInfo("");
 				this.waiting = false;
 			}), 3000);
 		},
@@ -182,7 +184,9 @@ define([
       	},
       	
 		removeClickHandling: function() {
-			this.removeHandler.remove();
+			if (this.removeHandler) {
+				this.removeHandler.remove();
+			}
 			query("td.selectCursor").removeClass("selectCursor");
       	},
       	
@@ -204,53 +208,32 @@ define([
 				else {
 					this.showInfo("Ouch, better luck next time...");
 				}
+				//Don't receive messages until waiting is done
+				this.waiting = true;
 				this.controller.secondCellSelected(this.secondCell);
 				//Make sure wait 3 seconds before receiving message again
-				this.waiting = true;
 				setTimeout(lang.hitch(this, function() {
-					this.removeCells(this.firstCell, this.secondCell);
+					this.checkResult(this.firstCell, this.secondCell);
+					this.showInfo("Please wait for second players move...");
 					this.waiting = false;
 				}), 3000);
 			}
 		},
 		
-		removeCells: function(firstCell, secondCell) {
-			domClass.remove(firstCell, "available");
-			domClass.remove(secondCell, "available");
-			domConstruct.empty(firstCell);
-			domConstruct.empty(secondCell);			
-		},
-		
 		//Checks the result and takes action accordingly
-		checkResult: function() {
+		checkResult: function(firstCell, secondCell) {
 			if (this.firstCell.children[0].src === this.secondCell.children[0].src) {
-//				game.currentPlayer.increment();
 				domClass.remove(this.firstCell, "available");
 				domClass.remove(this.secondCell, "available");
 				domConstruct.empty(this.firstCell);
 				domConstruct.empty(this.secondCell);
-				this.reset();
-//				dojoObj.domStyle.set(firstCell, "backgroundImage", "");
-//				dojoObj.domStyle.set(secondCell, "backgroundImage", "");
-//				this.showScore();
-//				if (query(".available").length <= 0) {
-//					//None left so game over
-//					this.showGameOver();
-//				}
-//				else {
-//					this.showPlayerInfo(true);
-//					this.addClickHandling();
-//				}
 			}
 			else {
 				domClass.add(this.firstCell.children[0], "hide");
 				domClass.add(this.secondCell.children[0], "hide");
-				this.reset();
-//				game.nextPlayer();
-//				this.showPlayerInfo();
-//				this.addClickHandling();
 			}
-			this.controller.secondCellSelected(this.secondCell);
+			this.reset();
+//			this.controller.secondCellSelected(this.secondCell);
 		}
 
 	});

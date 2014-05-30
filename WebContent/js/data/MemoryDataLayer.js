@@ -85,7 +85,7 @@ define(["dojo/_base/declare", "dojo/topic"], function(declare, topic) {
 							id1: "pos-1",
 							id2: "pos-3"
 						},
-		    			yourTurn: true
+						yourMove: true
 	    			}
 	    		}	
 	    		);
