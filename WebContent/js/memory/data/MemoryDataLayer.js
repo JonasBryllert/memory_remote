@@ -20,7 +20,7 @@ memory.ArrayFunctions = (function() {
 })();
 
 //Store images locally temp
-var images = ["images/panda.jpg", "images/frog.jpg", "images/cheetah.jpg", "images/elephant.jpg"];
+var images = ["images/memory/panda.jpg", "images/memory/frog.jpg", "images/memory/cheetah.jpg", "images/memory/elephant.jpg"];
 //The shuffled array of images containing two of each
 var shuffledImages = memory.ArrayFunctions.shuffle(memory.ArrayFunctions.duplicate(images));
 

@@ -45,19 +45,6 @@
 		<main>
             <div id="main" class="text-center info">
                 <table id="gameTable" class="center">
-                    <!--
-                    <tbody>
-                        <tr>
-                            <td><img class="show" alt="1" src="images/panda.jpg"></td>
-                            <td><img class="hide" alt="1" src="images/frog.jpg"></tr>
-                        </td>
-                        <tr>
-                            <td><img alt="1" src="images/panda.jpg">
-                            <td><img alt="1" src="images/frog.jpg">
-                        </td>
-
-                    </tbody>
-                     -->
                 </table>
             </div>
         </main>
@@ -70,15 +57,15 @@
 	        async: true,
 	        baseUrl: "js/",
 	        packages: [
-		   				{ name: "ui", location: "ui" },
-		   				{ name: "controller", location: "controller" },
-		   				{ name: "data", location: "data" }
+		   				{ name: "ui", location: "memory/ui" },
+		   				{ name: "controller", location: "memory/controller" },
+		   				{ name: "data", location: "memory/data" }
 	   	    	]
 	    };
 	</script>
 	<script type="text/javascript" src="lib/dojo/dojo.js" data-dojo-config="async: true"></script>
 	<script type="text/javascript" src="lib/bootstrap/js/bootstrap.js"></script>
-	<script type="text/javascript" src="js/MemoryConnector.js"></script>
+	<script type="text/javascript" src="js/memory/MemoryConnector.js"></script>
 	
 </body>
 </html>

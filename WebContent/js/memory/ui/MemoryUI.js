@@ -128,13 +128,13 @@ define([
 		previousMove: function(move) {
 			var prevMove = move.previousMove;
 			this.waiting = true;
-			var td1 = dom.byId(prevMove.id1);
-			var td2 = dom.byId(prevMove.id2);
-			domClass.remove(td1.children[0], "hide");
-			domClass.remove(td2.children[0], "hide");
+			this.firstCell = dom.byId(prevMove.id1);
+			this.secondCell = dom.byId(prevMove.id2);
+			domClass.remove(this.firstCell.children[0], "hide");
+			domClass.remove(this.secondCell.children[0], "hide");
 			this.showInfo("Other player made a move...");
 			setTimeout(lang.hitch(this, function() {
-				this.checkResult(td1, td2);
+				this.checkResult(this.firstCell, this.secondCell);
 				this.showInfo("");
 				this.waiting = false;
 			}), 3000);

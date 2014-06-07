@@ -10,7 +10,7 @@ body {
 
 #headerDiv {
 /*    background-color: #3e8f3e;*/
-	background-image: url("../images/checkered.jpg");
+	background-image: url("../images/memory/checkered.jpg");
 }
 #headerDiv * {
 	background-image: none;
@@ -64,7 +64,7 @@ body {
 }
 
 #gameTable td.available {
-	background-image: url("../images/checkered.jpg");
+	background-image: url("../images/memory/checkered.jpg");
 }
 
 #gameTable img {
